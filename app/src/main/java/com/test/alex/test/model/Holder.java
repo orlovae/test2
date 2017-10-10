@@ -19,7 +19,7 @@ public class Holder<T extends IModel>{
         this.model = model;
     }
 
-    public String showType() {
+    public String getSimpleName() {
         return model.getClass().getSimpleName();
     }
 }

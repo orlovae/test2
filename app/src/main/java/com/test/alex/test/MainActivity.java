@@ -5,7 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.test.alex.test.fabrice.Fabrice;
 import com.test.alex.test.model.Holder;
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         list = new ArrayList<Holder>();
 
-        for (int i = startRandomMassive; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             final Random typeModel = new Random();
             int type = Integer.valueOf(typeModel.nextInt(3));
 //            Log.d("MainActivity", "type = " + type);
@@ -67,10 +66,6 @@ public class MainActivity extends AppCompatActivity {
                     list.add(new Holder<>(fabrice.createNotice()));
                     break;
             }
-        }
-        for (Holder item:list
-             ) {
-            Log.d("MainActivity", "list item = " + item.getModel().toString());
         }
     }
 

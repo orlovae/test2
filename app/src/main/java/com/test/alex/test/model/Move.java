@@ -5,11 +5,16 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
+import static com.test.alex.test.Constant.ESTIMAL_TIME;
+import static com.test.alex.test.Constant.FROM_PLACE;
+import static com.test.alex.test.Constant.FULL_FORMAT;
+import static com.test.alex.test.Constant.TO_PLACE;
+
 /**
  * Created by alex on 14.08.17.
  */
 
-public class Move implements Parcelable, IModel {
+public class Move implements IModel {
     private String fromPlace;
     private String toPlace;
     private Date estimalTime;
@@ -26,80 +31,6 @@ public class Move implements Parcelable, IModel {
         fromPlace = date[0];
         toPlace = date[1];
         estimalTime = new Date(in.readLong());
-    }
-
-    @Override
-    public Date getStartTime() {
-        return null;
-    }
-
-    @Override
-    public Date getEndTime() {
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public void setStartTime(Date startTime) {
-
-    }
-
-    @Override
-    public void setEndTime(Date endTime) {
-
-    }
-
-    @Override
-    public void setName(String name) {
-
-    }
-
-    public String getFromPlace() {
-        return fromPlace;
-    }
-
-    public String getToPlace() {
-        return toPlace;
-    }
-
-    public Date getEstimalTime() {
-        return estimalTime;
-    }
-
-    public void setFromPlace(String fromPlace) {
-        this.fromPlace = fromPlace;
-    }
-
-    public void setToPlace(String toPlace) {
-        this.toPlace = toPlace;
-    }
-
-    public void setEstimalTime(Date estimalTime) {
-        this.estimalTime = estimalTime;
-    }
-
-    @Override
-    public Date getFlightDate() {
-        return null;
-    }
-
-    @Override
-    public String getGate() {
-        return null;
-    }
-
-    @Override
-    public void setFlightDate(Date flightDate) {
-
-    }
-
-    @Override
-    public void setGate(String gate) {
-
     }
 
     @Override
@@ -125,4 +56,22 @@ public class Move implements Parcelable, IModel {
             return new Move[i];
         }
     };
+
+    @Override
+    public String getInfoFromModel() {
+        StringBuffer buffer = new StringBuffer(this.getClass().getSimpleName());
+        buffer.append("\n ");
+        buffer.append(FROM_PLACE);
+        buffer.append(" - ");
+        buffer.append(fromPlace);
+        buffer.append("\n ");
+        buffer.append(TO_PLACE);
+        buffer.append(" - ");
+        buffer.append(toPlace);
+        buffer.append("\n ");
+        buffer.append(ESTIMAL_TIME);
+        buffer.append(": ");
+        buffer.append(FULL_FORMAT.format(estimalTime));
+        return buffer.toString();
+    }
 }

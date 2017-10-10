@@ -5,11 +5,16 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
+import static com.test.alex.test.Constant.END_TIME;
+import static com.test.alex.test.Constant.FULL_FORMAT;
+import static com.test.alex.test.Constant.NAME;
+import static com.test.alex.test.Constant.START_TIME;
+
 /**
  * Created by alex on 14.08.17.
  */
 
-public class Event implements Parcelable, IModel {
+public class Event implements IModel {
     private Date startTime;
     private Date endTime;
     private String name;
@@ -53,84 +58,20 @@ public class Event implements Parcelable, IModel {
     };
 
     @Override
-    public Date getStartTime() {
-        return startTime;
+    public String getInfoFromModel() {
+        StringBuffer buffer = new StringBuffer(this.getClass().getSimpleName());
+        buffer.append("\n ");
+        buffer.append(START_TIME);
+        buffer.append(": ");
+        buffer.append(FULL_FORMAT.format(startTime));
+        buffer.append("\n ");
+        buffer.append(END_TIME);
+        buffer.append(": ");
+        buffer.append(FULL_FORMAT.format(endTime));
+        buffer.append("\n ");
+        buffer.append(NAME);
+        buffer.append(" - ");
+        buffer.append(name);
+        return buffer.toString();
     }
-
-    @Override
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    @Override
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getFromPlace() {
-        return null;
-    }
-
-    @Override
-    public String getToPlace() {
-        return null;
-    }
-
-    @Override
-    public Date getEstimalTime() {
-        return null;
-    }
-
-    @Override
-    public void setFromPlace(String fromPlace) {
-
-    }
-
-    @Override
-    public void setToPlace(String toPlace) {
-
-    }
-
-    @Override
-    public void setEstimalTime(Date estimalTime) {
-
-    }
-
-    @Override
-    public Date getFlightDate() {
-        return null;
-    }
-
-    @Override
-    public String getGate() {
-        return null;
-    }
-
-    @Override
-    public void setFlightDate(Date flightDate) {
-
-    }
-
-    @Override
-    public void setGate(String gate) {
-
-    }
-
-
 }

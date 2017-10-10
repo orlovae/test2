@@ -5,11 +5,15 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
+import static com.test.alex.test.Constant.FLIGHT_DATE;
+import static com.test.alex.test.Constant.FULL_FORMAT;
+import static com.test.alex.test.Constant.GATE;
+
 /**
  * Created by alex on 14.08.17.
  */
 
-public class Notice implements Parcelable, IModel {
+public class Notice implements IModel {
     private Date flightDate;
     private String gate;
 
@@ -21,82 +25,6 @@ public class Notice implements Parcelable, IModel {
     public Notice(Parcel in) {
         flightDate = new Date(in.readLong());
         gate = in.readString();
-    }
-
-    @Override
-    public Date getStartTime() {
-        return null;
-    }
-
-    @Override
-    public Date getEndTime() {
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
-
-    @Override
-    public void setStartTime(Date startTime) {
-
-    }
-
-    @Override
-    public void setEndTime(Date endTime) {
-
-    }
-
-    @Override
-    public void setName(String name) {
-
-    }
-
-    @Override
-    public String getFromPlace() {
-        return null;
-    }
-
-    @Override
-    public String getToPlace() {
-        return null;
-    }
-
-    @Override
-    public Date getEstimalTime() {
-        return null;
-    }
-
-    @Override
-    public void setFromPlace(String fromPlace) {
-
-    }
-
-    @Override
-    public void setToPlace(String toPlace) {
-
-    }
-
-    @Override
-    public void setEstimalTime(Date estimalTime) {
-
-    }
-
-    public Date getFlightDate() {
-        return flightDate;
-    }
-
-    public void setFlightDate(Date flightDate) {
-        this.flightDate = flightDate;
-    }
-
-    public String getGate() {
-        return gate;
-    }
-
-    public void setGate(String gate) {
-        this.gate = gate;
     }
 
     @Override
@@ -122,4 +50,18 @@ public class Notice implements Parcelable, IModel {
             return new Notice[i];
         }
     };
+
+    @Override
+    public String getInfoFromModel() {
+        StringBuffer buffer = new StringBuffer(this.getClass().getSimpleName());
+        buffer.append("\n ");
+        buffer.append(FLIGHT_DATE);
+        buffer.append(": ");
+        buffer.append(FULL_FORMAT.format(flightDate));
+        buffer.append("\n ");
+        buffer.append(GATE);
+        buffer.append(" - ");
+        buffer.append(gate);
+        return buffer.toString();
+    }
 }
