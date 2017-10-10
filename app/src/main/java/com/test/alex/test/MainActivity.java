@@ -7,13 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.test.alex.test.model.Event;
+import com.test.alex.test.fabrice.Fabrice;
 import com.test.alex.test.model.Holder;
-import com.test.alex.test.model.Move;
-import com.test.alex.test.model.Notice;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -21,21 +18,22 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
 
+
     private int size;
     private final Random sizeMassive = new Random();
     private int startRandomMassive = 10;
     private int endRandomMassive = 100;
 
+    private Fabrice fabrice;
     private List<Holder> list;
-
-    public static final String EVENT = "event";
-    public static final String MOVE = "move";
-    public static final String NOTICE = "notice";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fabrice = new Fabrice();
+
         initView();
         generateContent();
         initRecyclerView();
@@ -60,44 +58,20 @@ public class MainActivity extends AppCompatActivity {
 //            Log.d("MainActivity", "type = " + type);
             switch (type) {
                 case 0:
-                    list.add(new Holder(fabriceEvent(), EVENT));
+                    list.add(new Holder<>(fabrice.createEvent()));
                     break;
                 case  1:
-                    list.add(new Holder(fabriceMove(), MOVE));
+                    list.add(new Holder<>(fabrice.createMove()));
                     break;
                 case 2:
-                    list.add(new Holder(fabriceNotice(), NOTICE));
+                    list.add(new Holder<>(fabrice.createNotice()));
                     break;
             }
         }
-
-        for (Object item:list
+        for (Holder item:list
              ) {
-            Log.d("MainActivity", "list item = " + item.toString());
+            Log.d("MainActivity", "list item = " + item.getModel().toString());
         }
-    }
-
-    private Notice fabriceNotice() {
-        Date flightDate = new Date((long) (Math.random()*1000000));
-        String gate = "gate" + (int)(Math.random()*100);
-
-        return new Notice(flightDate, gate);
-    }
-
-    private Event fabriceEvent() {
-        Date startTime = new Date((long) (Math.random()*1000000));
-        Date endTime = new Date((long) (Math.random()*1000000));
-        String name = "name" + (int)(Math.random()*100);
-
-        return new Event(startTime, endTime, name);
-    }
-
-    private Move fabriceMove() {
-        String fromPlace = "fromPlace" + (int)(Math.random()*100);
-        String toPlace = "toPlace" + (int)(Math.random()*100);
-        Date estimaTime = new Date((long) (Math.random()*1000000));
-
-        return new Move(fromPlace, toPlace, estimaTime);
     }
 
     private void initRecyclerView() {

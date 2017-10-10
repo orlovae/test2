@@ -4,28 +4,22 @@ package com.test.alex.test.model;
  * Created by alex on 14.08.17.
  */
 
-public class Holder {
-    private Object object;
-    private String type;
+public class Holder<T extends IModel>{
+    T model;
 
-    public Holder(Object object, String type) {
-        this.object = object;
-        this.type = type;
+    public Holder(T model) {
+        this.model = model;
     }
 
-    public Object getObject() {
-        return object;
+    public T getModel() {
+        return model;
     }
 
-    public void setObject(Object object) {
-        this.object = object;
+    public void setModel(T model) {
+        this.model = model;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public String showType() {
+        return model.getClass().getSimpleName();
     }
 }

@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by alex on 14.08.17.
  */
 
-public class Notice implements Parcelable {
+public class Notice implements Parcelable, IModel {
     private Date flightDate;
     private String gate;
 
@@ -21,6 +21,66 @@ public class Notice implements Parcelable {
     public Notice(Parcel in) {
         flightDate = new Date(in.readLong());
         gate = in.readString();
+    }
+
+    @Override
+    public Date getStartTime() {
+        return null;
+    }
+
+    @Override
+    public Date getEndTime() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public void setStartTime(Date startTime) {
+
+    }
+
+    @Override
+    public void setEndTime(Date endTime) {
+
+    }
+
+    @Override
+    public void setName(String name) {
+
+    }
+
+    @Override
+    public String getFromPlace() {
+        return null;
+    }
+
+    @Override
+    public String getToPlace() {
+        return null;
+    }
+
+    @Override
+    public Date getEstimalTime() {
+        return null;
+    }
+
+    @Override
+    public void setFromPlace(String fromPlace) {
+
+    }
+
+    @Override
+    public void setToPlace(String toPlace) {
+
+    }
+
+    @Override
+    public void setEstimalTime(Date estimalTime) {
+
     }
 
     public Date getFlightDate() {

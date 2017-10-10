@@ -9,7 +9,7 @@ import java.util.Date;
  * Created by alex on 14.08.17.
  */
 
-public class Event implements Parcelable {
+public class Event implements Parcelable, IModel {
     private Date startTime;
     private Date endTime;
     private String name;
@@ -26,30 +26,6 @@ public class Event implements Parcelable {
         startTime = new Date(date[0]);
         endTime = new Date(date[1]);
         name = in.readString();
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
@@ -75,4 +51,86 @@ public class Event implements Parcelable {
             return new Event[i];
         }
     };
+
+    @Override
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    @Override
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    @Override
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getFromPlace() {
+        return null;
+    }
+
+    @Override
+    public String getToPlace() {
+        return null;
+    }
+
+    @Override
+    public Date getEstimalTime() {
+        return null;
+    }
+
+    @Override
+    public void setFromPlace(String fromPlace) {
+
+    }
+
+    @Override
+    public void setToPlace(String toPlace) {
+
+    }
+
+    @Override
+    public void setEstimalTime(Date estimalTime) {
+
+    }
+
+    @Override
+    public Date getFlightDate() {
+        return null;
+    }
+
+    @Override
+    public String getGate() {
+        return null;
+    }
+
+    @Override
+    public void setFlightDate(Date flightDate) {
+
+    }
+
+    @Override
+    public void setGate(String gate) {
+
+    }
+
+
 }

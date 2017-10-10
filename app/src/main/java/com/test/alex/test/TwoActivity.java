@@ -1,6 +1,5 @@
 package com.test.alex.test;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +10,9 @@ import com.test.alex.test.model.Event;
 import com.test.alex.test.model.Move;
 import com.test.alex.test.model.Notice;
 
-import static com.test.alex.test.MainActivity.EVENT;
-import static com.test.alex.test.MainActivity.MOVE;
-import static com.test.alex.test.MainActivity.NOTICE;
+import static com.test.alex.test.Constant.EVENT;
+import static com.test.alex.test.Constant.MOVE;
+import static com.test.alex.test.Constant.NOTICE;
 
 /**
  * Created by alex on 14.08.17.
@@ -55,7 +54,7 @@ public class TwoActivity extends AppCompatActivity {
                 textView1.setText(move.getFromPlace());
                 textView2.setText(move.getToPlace());
                 textView3.setVisibility(View.VISIBLE);
-                textView3.setText(move.getEstimaTime().toString());
+                textView3.setText(move.getEstimalTime().toString());
             }
 
             if (extras.containsKey(NOTICE)) {

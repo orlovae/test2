@@ -9,15 +9,15 @@ import java.util.Date;
  * Created by alex on 14.08.17.
  */
 
-public class Move implements Parcelable {
+public class Move implements Parcelable, IModel {
     private String fromPlace;
     private String toPlace;
-    private Date estimaTime;
+    private Date estimalTime;
 
-    public Move(String fromPlace, String toPlace, Date estimaTime) {
+    public Move(String fromPlace, String toPlace, Date estimalTime) {
         this.fromPlace = fromPlace;
         this.toPlace = toPlace;
-        this.estimaTime = estimaTime;
+        this.estimalTime = estimalTime;
     }
 
     public Move(Parcel in) {
@@ -25,7 +25,37 @@ public class Move implements Parcelable {
         in.readStringArray(date);
         fromPlace = date[0];
         toPlace = date[1];
-        estimaTime = new Date(in.readLong());
+        estimalTime = new Date(in.readLong());
+    }
+
+    @Override
+    public Date getStartTime() {
+        return null;
+    }
+
+    @Override
+    public Date getEndTime() {
+        return null;
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public void setStartTime(Date startTime) {
+
+    }
+
+    @Override
+    public void setEndTime(Date endTime) {
+
+    }
+
+    @Override
+    public void setName(String name) {
+
     }
 
     public String getFromPlace() {
@@ -36,8 +66,8 @@ public class Move implements Parcelable {
         return toPlace;
     }
 
-    public Date getEstimaTime() {
-        return estimaTime;
+    public Date getEstimalTime() {
+        return estimalTime;
     }
 
     public void setFromPlace(String fromPlace) {
@@ -48,8 +78,28 @@ public class Move implements Parcelable {
         this.toPlace = toPlace;
     }
 
-    public void setEstimaTime(Date estimaTime) {
-        this.estimaTime = estimaTime;
+    public void setEstimalTime(Date estimalTime) {
+        this.estimalTime = estimalTime;
+    }
+
+    @Override
+    public Date getFlightDate() {
+        return null;
+    }
+
+    @Override
+    public String getGate() {
+        return null;
+    }
+
+    @Override
+    public void setFlightDate(Date flightDate) {
+
+    }
+
+    @Override
+    public void setGate(String gate) {
+
     }
 
     @Override
@@ -60,7 +110,7 @@ public class Move implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeStringArray(new String[] {fromPlace, toPlace});
-        parcel.writeLong(estimaTime.getTime());
+        parcel.writeLong(estimalTime.getTime());
     }
 
     public static final Parcelable.Creator<Move> CREATOR = new Parcelable.Creator<Move>() {

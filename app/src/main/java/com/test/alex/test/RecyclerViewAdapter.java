@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,9 @@ import com.test.alex.test.model.Notice;
 
 import java.util.List;
 
-import static com.test.alex.test.MainActivity.EVENT;
-import static com.test.alex.test.MainActivity.MOVE;
-import static com.test.alex.test.MainActivity.NOTICE;
+import static com.test.alex.test.Constant.EVENT;
+import static com.test.alex.test.Constant.MOVE;
+import static com.test.alex.test.Constant.NOTICE;
 
 /**
  * Created by alex on 14.08.17.
@@ -26,8 +27,9 @@ import static com.test.alex.test.MainActivity.NOTICE;
 
 public class RecyclerViewAdapter extends
     RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
-        private Context context;
-        private List<Holder> list;
+    private Context context;
+    private List<Holder> list;
+    private Holder holder1;
 
     public RecyclerViewAdapter(Context context, List<Holder> list) {
             this.context = context;
@@ -45,19 +47,20 @@ public class RecyclerViewAdapter extends
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         //Вывод на экран имени каждого объекта
-        String typeObject = list.get(position).getType();
+        holder1 = list.get(position);
+        String typeObject = holder1.showType();
         switch (typeObject) {
             case EVENT:
-                Event event = (Event)(list.get(position).getObject());
-                holder.textView.setText(EVENT + " " + event.getName());
+                Log.d("RecyclerViewAdapter", "Event name = " + holder1.getModel().getName());
+                holder.textView.setText(EVENT + " " + holder1.getModel().getName());
                 break;
             case MOVE:
-                Move move = (Move)(list.get(position).getObject());
-                holder.textView.setText(MOVE + " " + move.getToPlace());
+                Log.d("RecyclerViewAdapter", "Move name = " + holder1.getModel().getToPlace());
+                holder.textView.setText(MOVE + " " + holder1.getModel().getToPlace());
                 break;
             case NOTICE:
-                Notice notice = (Notice)(list.get(position).getObject());
-                holder.textView.setText(NOTICE + " " + notice.getGate());
+                Log.d("RecyclerViewAdapter", "Notice name = " + holder1.getModel().getGate());
+                holder.textView.setText(NOTICE + " " + holder1.getModel().getGate());
                 break;
         }
 
@@ -67,25 +70,25 @@ public class RecyclerViewAdapter extends
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
                 Intent intent = new Intent(context, TwoActivity.class);
-                String typeObject = list.get(position).getType();
+                String typeObject = holder1.showType();
                 switch (typeObject) {
                     case EVENT:
-                        Event event = (Event)(list.get(position).getObject());
+                        Event event = (Event) holder1.getModel();
                         bundle.putParcelable(EVENT, event);
                         intent.putExtras(bundle);
-                        holder.textView.setText(EVENT + event.getName());
+                        holder.textView.setText(EVENT + " " + event.getName());
                         break;
                     case MOVE:
-                        Move move = (Move)(list.get(position).getObject());
+                        Move move = (Move) holder1.getModel();
                         bundle.putParcelable(MOVE, move);
                         intent.putExtras(bundle);
-                        holder.textView.setText(MOVE + move.getToPlace());
+                        holder.textView.setText(MOVE + " " + move.getToPlace());
                         break;
                     case NOTICE:
-                        Notice notice = (Notice)(list.get(position).getObject());
+                        Notice notice = (Notice) holder1.getModel();
                         bundle.putParcelable(NOTICE, notice);
                         intent.putExtras(bundle);
-                        holder.textView.setText(NOTICE + notice.getGate());
+                        holder.textView.setText(NOTICE + " " + notice.getGate());
                         break;
                 }
                 context.startActivity(intent);
